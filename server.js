@@ -16,19 +16,29 @@ const { DateTime } = require('luxon');
 
 const server = http.createServer((req, res) => {
         console.log('Server started');
-        let params = url.parse(req.url, true).query
-
-        let data = {
-            "slack_name": params.slack_name,
-            "current_day": DateTime.now().weekdayLong,
-            "utc_time": DateTime.utc().plus({hours: 2}),    // Offset for +/- hours
-            "track": params.track,
-            "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
-            "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
-            "status_code": res.statusCode
-        };
-
-        res.end(JSON.stringify(data));
+        console.log(req.url);
+        if(req.url.startsWith('/api')) {
+            let params = url.parse(req.url, true).query
+            console.log(params);
+            if(params.track && params.slack_name) {
+                let data = {
+                    "slack_name": params.slack_name,
+                    "current_day": DateTime.now().weekdayLong,
+                    "utc_time": DateTime.utc().plus({minutes: 2}),    // Offset for +/- minutes
+                    "track": params.track,
+                    "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
+                    "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
+                    "status_code": res.statusCode
+                };
+                res.end(JSON.stringify(data));
+            } else {
+                res.statusCode = 400;
+                res.end('Please add parameters: track and slack_name');
+            }
+        } else {
+            res.statusCode = 404;
+            res.end('Not Found: Check your request!');
+        }
     }
 );
 
