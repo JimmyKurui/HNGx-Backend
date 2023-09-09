@@ -14,9 +14,6 @@ const { DateTime } = require('luxon');
     }
 */
 
-console.log(DateTime.now().toISO());
-
-
 const server = http.createServer((req, res) => {
         console.log('Server started');
         let params = url.parse(req.url, true).query
@@ -26,8 +23,8 @@ const server = http.createServer((req, res) => {
             "current_day": DateTime.now().day,
             "utc_time": DateTime.now().toISO(),
             "track": params.track,
-            "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/main/server.py",
-            "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend",
+            "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
+            "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
             "status_code": res.statusCode
         };
 
