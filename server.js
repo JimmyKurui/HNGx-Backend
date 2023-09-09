@@ -20,8 +20,8 @@ const server = http.createServer((req, res) => {
 
         let data = {
             "slack_name": params.slack_name,
-            "current_day": DateTime.now().day,
-            "utc_time": DateTime.now().toISO(),
+            "current_day": DateTime.now().weekdayLong,
+            "utc_time": DateTime.utc().plus({hours: 2}),    // Offset for +/- hours
             "track": params.track,
             "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
             "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
