@@ -1,5 +1,7 @@
 const http = require('http');
 const url = require('url');
+const fs = require('fs');
+
 const { DateTime } = require('luxon');
 
 /*  Payload requirments
@@ -16,10 +18,10 @@ const { DateTime } = require('luxon');
 
 const server = http.createServer((req, res) => {
         console.log('Server started');
-        console.log(req.url);
+        // Check for api path
         if(req.url.startsWith('/api')) {
             let params = url.parse(req.url, true).query
-            console.log(params);
+            // Check for query parameters
             if(params.track && params.slack_name) {
                 let data = {
                     "slack_name": params.slack_name,
@@ -30,14 +32,23 @@ const server = http.createServer((req, res) => {
                     "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
                     "status_code": res.statusCode
                 };
+                res.setHeader('Content-Type', 'application/json')
                 res.end(JSON.stringify(data));
             } else {
+                // Bad Request Parameters
                 res.statusCode = 400;
-                res.end('Please add parameters: track and slack_name');
+                res.setHeader('Content-Type', 'text/html')
+                fs.readFile('./views/400.html', (err, data) => {
+                    err ? console.log(err) : res.end(data.toString())
+                })
             }
         } else {
+            // Bad Request
             res.statusCode = 404;
-            res.end('Not Found: Check your request!');
+            res.setHeader('Content-Type', 'text/html')
+            fs.readFile('./views/404.html', (err, data) => {
+                err ? console.log(err) : res.end(data.toString())
+            })
         }
     }
 );
