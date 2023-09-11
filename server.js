@@ -16,6 +16,9 @@ port = process.env.PORT || 3000;
         "status_code": 200
     }
 */
+const utcTimeString = DateTime.utc().toString();
+
+console.log(utcTimeString);
 
 const server = http.createServer((req, res) => {
         console.log('Server started');
@@ -27,7 +30,8 @@ const server = http.createServer((req, res) => {
                 let data = {
                     "slack_name": params.slack_name,
                     "current_day": DateTime.now().weekdayLong,
-                    "utc_time": DateTime.now().plus({minutes: 2}),    // Offset for +/- minutes
+                    // "utc_time": DateTime.now().plus({minutes: 2}),    // Offset for +/- minutes
+                    "utc_time": utcTimeString,    // Offset for +/- minutes
                     "track": params.track,
                     "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
                     "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
