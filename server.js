@@ -1,9 +1,13 @@
+const express = require('express');
+
+
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
 
 const { DateTime } = require('luxon');
 
+port = process.env.PORT || 3000;
 /*  Payload requirments
     {
         "slack_name": "example_name",
@@ -53,6 +57,6 @@ const server = http.createServer((req, res) => {
     }
 );
 
-server.listen(443, 'localhost', () => {
-    console.log('Listening for requests...')
+server.listen(port, () => {
+    console.log(`Server running on ${port}`);
 });
