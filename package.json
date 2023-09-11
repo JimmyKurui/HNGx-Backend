@@ -1,5 +1,12 @@
 {
+  "name": "hngx-backend-s1",
+  "version": "1.0.0",
+  "description": "An API service for backend stage one",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "luxon": "^3.4.3"
-  }
+    }
 }
