@@ -19,17 +19,15 @@ port = process.env.PORT || 3000;
         "status_code": 200
     }
 */
-const utcTimeString = DateTime.utc().toString();
-
-console.log(utcTimeString);
 
 const server = http.createServer((req, res) => {
-        console.log('Server started');
-        // Check for api path
-        if(req.url.startsWith('/api')) {
-            let params = url.parse(req.url, true).query
-            // Check for query parameters
-            if(params.track && params.slack_name) {
+    console.log('Server started');
+    // Check for api path
+    if(req.url.startsWith('/api')) {
+        let params = url.parse(req.url, true).query
+        // Check for query parameters
+        if(params.track && params.slack_name) {
+                let utcTimeString = DateTime.utc().toString();
                 let data = {
                     "slack_name": params.slack_name,
                     "current_day": DateTime.now().weekdayLong,
