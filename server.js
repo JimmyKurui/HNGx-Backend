@@ -53,6 +53,6 @@ const server = http.createServer((req, res) => {
     }
 );
 
-server.listen(80, 'localhost', () => {
+server.listen(443, 'localhost', () => {
     console.log('Listening for requests...')
 });
