@@ -1,7 +1,9 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
+const moment = require('moment');
 
+const utc_time = moment.utc().format() 
 const { DateTime } = require('luxon');
 
 port = process.env.PORT || 3000;
@@ -31,7 +33,7 @@ const server = http.createServer((req, res) => {
                     "slack_name": params.slack_name,
                     "current_day": DateTime.now().weekdayLong,
                     // "utc_time": DateTime.now().plus({minutes: 2}),    // Offset for +/- minutes
-                    "utc_time": utcTimeString,    // Offset for +/- minutes
+                    "utc_time": utc_time,    // Offset for +/- minutes
                     "track": params.track,
                     "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
                     "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",

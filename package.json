@@ -7,9 +7,9 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "luxon": "^3.4.3"
+    "luxon": "^3.4.3",
+    "moment": "^2.29.4"
   },
-  "devDependencies": {},
   "keywords": [],
   "author": "jkurui",
   "license": "MIT"
