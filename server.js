@@ -1,23 +1,21 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-const moment = require('moment');
 
-const utc_time = moment.utc().format() 
+const moment = require('moment');
 const { DateTime } = require('luxon');
-const utcTime = new Date(Date.now()).toISOString().split('.')[0] + 'Z';
 
 port = process.env.PORT || 3000;
 /*  Payload requirments
-    {
-        "slack_name": "example_name",
-        "current_day": "Monday",
-        "utc_time": "2023-08-21T15:04:05Z",
-        "track": "backend",
-        "github_file_url": "https://github.com/username/repo/blob/main/file_name.ext",
-        "github_repo_url": "https://github.com/username/repo",
-        "status_code": 200
-    }
+{
+    "slack_name": "example_name",
+    "current_day": "Monday",
+    "utc_time": "2023-08-21T15:04:05Z",
+    "track": "backend",
+    "github_file_url": "https://github.com/username/repo/blob/main/file_name.ext",
+    "github_repo_url": "https://github.com/username/repo",
+    "status_code": 200
+}
 */
 
 const server = http.createServer((req, res) => {
@@ -27,15 +25,15 @@ const server = http.createServer((req, res) => {
         let params = url.parse(req.url, true).query
         // Check for query parameters
         if(params.track && params.slack_name) {
-                let utcTimeString = DateTime.utc().toString();
-                let data = {
-                    "slack_name": params.slack_name,
-                    "current_day": DateTime.now().weekdayLong,
-                    // "utc_time": DateTime.now().plus({minutes: 2}),    // Offset for +/- minutes
-                    "utc_time": utc_time,    // Offset for +/- minutes
-                    "track": params.track,
-                    "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
-                    "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
+            const utc_time = moment.utc().format() 
+            let data = {
+                "slack_name": params.slack_name,
+                "current_day": DateTime.now().weekdayLong,
+                // "utc_time": DateTime.now().plus({minutes: 2}),    // Offset for +/- minutes
+                "utc_time": utc_time,    // Offset for +/- minutes
+                "track": params.track,
+                "github_file_url": "https://github.com/JimmyKurui/HNGx-Backend/blob/stage-one/server.js",
+                "github_repo_url": "https://github.com/JimmyKurui/HNGx-Backend/tree/stage-one",
                     "status_code": res.statusCode
                 };
                 res.setHeader('Content-Type', 'application/json')
