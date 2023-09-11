@@ -4,7 +4,7 @@
   "description": "An API service for backend stage one",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "npm install && node server.js"
   },
   "dependencies": {
     "luxon": "^3.4.3"
