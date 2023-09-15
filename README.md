@@ -17,6 +17,9 @@ This is a simple REST API for managing persons. It allows you to perform CRUD op
 - [Testing](#testing)
 - [Dependencies](#dependencies)
 - [License](#license)
+  
+---
+- [UML Diagrams](#uml)
 
 ## Getting Started
 
@@ -41,14 +44,14 @@ To run this API, you need to have the following installed:
 ### Running the API
 To start the API, run the following command `npm start` for the start script. The API will then be live on `http://localhost:3000` . This port configuration can be changed from 3000 in the PORT constant variable in app.js
 
-### API-endpoints
+## API-endpoints
 
 * **POST /api** Create a new person.
 * **GET /api/:user_id?** Retrieve details of a person by ID. Without user_id it retrieves all records in the database as a default
 * **PUT /api/:user_id** Update details of an existing person by ID.
 * **DELETE /api/:user_id** Delete a person by ID.
 
-### Request/Response Format
+## Request/Response Format
 1. Create a Person (POST /api)
 
 Request:
@@ -98,7 +101,7 @@ Response:
 }
 ```
 
-### Usage Examples
+## Usage Examples
 Here are some example API usage scenarios:
 
 1. Create a new person: POST /api
@@ -115,7 +118,7 @@ Without a user_id, all records are retrieved
 7. Delete a person: DELETE /api/:id
 ![delete](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/977737a9-95f4-4911-a978-a11f13aeb4bc)
 
-### Testing
+## Testing
 Using Postman, an API testing tool. We can follow on test cases, validity and error handling.
 
 **Post / Put Routes**
@@ -151,9 +154,15 @@ Bad Get - 404
 ![image](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/9148e921-9935-44e0-9825-fbe30ae20236)
 
 Bad Delete - 404
-### Dependencies
+## Dependencies
 * express - Node Framework
 * sqlite3 - Database
  
-### License
+## License
 This project is licensed under the MIT License.
+
+## UML Diagrams
+1. Class Diagram
+
+![class_diagram](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/6be799cf-e8c4-4d22-a1b2-b8b2d353e6dc)
+
