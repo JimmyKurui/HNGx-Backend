@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS persons (
     
 // READ details of person by ID or all records 
 router.get('/:user_id?', (req, res) => {
-    const id = req.params.id;
+    const id = req.params.user_id;
     sqlAll = 'SELECT * FROM persons';
     sqlOne = 'SELECT * FROM persons WHERE id = ?';
     
@@ -54,45 +54,45 @@ router.post('/', (req, res) => {
 
   // Validate name as a string
   if (!isString(name)) {
-    return res.status(400).json({ error: 'Name should be a string' });
+    return res.status(400).json({ error: 'Name should be a string for new record' });
   }
   // Validate age as an integer (you can add more validation as needed)
   if (age !== undefined && !Number.isInteger(age)) {
-    return res.status(400).json({ error: 'Age should be an integer' });
+    return res.status(400).json({ error: 'Age should be an integer for new record' });
   }
 
   db.run('INSERT INTO persons (name, age) VALUES (?, ?)', [name, age], function (err) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ id: this.lastID, message: 'Person added successfully' });
+    res.json({ id: this.lastID, message: name + ' added successfully' });
   });
 });
 
 // UPDATE details of an existing person by ID
 router.put('/:user_id', (req, res) => {
-  const id = req.params.id;
+  const id = req.params.user_id;
   const { name, age } = req.body;
 
   // Validate name as a string
   if (!isString(name)) {
-      return res.status(400).json({ error: 'Name should be a string' });
+      return res.status(400).json({ error: 'Name should be a string for record update' });
   }
   // Validate age as an integer
   if (!Number.isInteger(age)) {
-      return res.status(400).json({ error: 'Age should be an integer' });
+      return res.status(400).json({ error: 'Age should be an integer for record update' });
   }
   db.run('UPDATE persons SET name = ?, age = ? WHERE id = ?', [name, age, id], function (err) {
       if (err) {
-      return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
       }
-      res.json({ message: 'Person updated successfully' });
+      res.json({ message: name + ' updated successfully' });
   });
 });
 
 // DELETE a person by ID
 router.delete('/:user_id', (req, res) => {
-  const id = req.params.id;
+  const id = req.params.user_id;
   db.run('DELETE FROM persons WHERE id = ?', [id], (err) => {
     if (err) {
       return res.status(500).json({ error: err.message });
