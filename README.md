@@ -134,6 +134,10 @@ Using Postman, an API testing tool. We can follow on test cases, validity and er
 
 * Error handling
   
+/api path check
+
+![image](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/de6c8641-addf-4bba-9aa1-1154af12a0a0)
+
 Bad Post - 404
 
 ![image](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/2b9e918d-0c3c-4fc4-b4b1-4bfce2d055db)
