@@ -156,6 +156,9 @@ Bad Get - 404
 ![image](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/9148e921-9935-44e0-9825-fbe30ae20236)
 
 Bad Delete - 404
+
+![image](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/4b160ab1-bfd3-4e76-848d-413888a78acc)
+
 ## Dependencies
 * express - Node Framework
 * sqlite3 - Database
