@@ -20,6 +20,8 @@ This is a simple REST API for managing persons. It allows you to perform CRUD op
   
 ---
 - [UML Diagrams](#uml)
+  - [Class Diagram](#class-dg) 
+  - [Architecture Model](#arch-dg) 
 
 ## Getting Started
 
@@ -162,7 +164,9 @@ Bad Delete - 404
 This project is licensed under the MIT License.
 
 ## UML Diagrams
-1. Class Diagram
+### Class Diagram
 
 ![class_diagram](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/6be799cf-e8c4-4d22-a1b2-b8b2d353e6dc)
 
+### Architecture Model
+![stage-two-arch](https://github.com/JimmyKurui/HNGx-Backend/assets/71793888/294172a7-f0ef-4137-aa69-af5847e53021)
