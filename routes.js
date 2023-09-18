@@ -14,9 +14,9 @@ function isString(value) {
 // Create the persons table 
 db.run(`
 CREATE TABLE IF NOT EXISTS persons (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name TEXT,
-    age INTEGER
+    value INTEGER
     )
 `);
     
@@ -50,43 +50,61 @@ router.get('/:user_id?', (req, res) => {
 
 // CREATE a new person
 router.post('/', (req, res) => {
-  const { name, age } = req.body;
+  const { name, value } = req.body;
 
   // Validate name as a string
   if (!isString(name)) {
     return res.status(400).json({ error: 'Name should be a string for new record' });
   }
-  // Validate age as an integer (you can add more validation as needed)
-  if (age !== undefined && !Number.isInteger(age)) {
-    return res.status(400).json({ error: 'Age should be an integer for new record' });
+  // Validate value as an integer (you can add more validation as needed)
+  if (value !== undefined && !Number.isInteger(value)) {
+    return res.status(400).json({ error: 'value should be an integer for new record' });
   }
 
-  db.run('INSERT INTO persons (name, age) VALUES (?, ?)', [name, age], function (err) {
+  db.run('INSERT INTO persons (name, value) VALUES (?, ?)', [name, value], function (err, row) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ id: this.lastID, message: name + ' added successfully' });
+    const insertedId = this.lastID;
+
+    db.get('SELECT * FROM persons WHERE id = ?', [insertedId], (err, row) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      if (!row) {
+        return res.status(404).json({ message: 'Person not found' });
+      }
+      res.json(row);
+      return res.json(row);
+    });
   });
 });
 
 // UPDATE details of an existing person by ID
 router.put('/:user_id', (req, res) => {
   const id = req.params.user_id;
-  const { name, age } = req.body;
+  const { name, value } = req.body;
 
   // Validate name as a string
   if (!isString(name)) {
       return res.status(400).json({ error: 'Name should be a string for record update' });
   }
-  // Validate age as an integer
-  if (!Number.isInteger(age)) {
-      return res.status(400).json({ error: 'Age should be an integer for record update' });
+  // Validate value as an integer
+  if (!Number.isInteger(value)) {
+      return res.status(400).json({ error: 'value should be an integer for record update' });
   }
-  db.run('UPDATE persons SET name = ?, age = ? WHERE id = ?', [name, age, id], function (err) {
+  db.run('UPDATE persons SET name = ?, value = ? WHERE id = ?', [name, value, id], function (err) {
       if (err) {
         return res.status(500).json({ error: err.message });
       }
-      res.json({ message: name + ' updated successfully' });
+      const insertedId = this.lastID;
+
+      db.get('SELECT * FROM persons WHERE id = ?', [insertedId], (err, row) => {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        return res.json(row);
+      });
   });
 });
 

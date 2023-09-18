@@ -55,7 +55,7 @@ Request:
 ```
 {
   "name": "John Doe",
-  "age": 30
+  "value": 30
 }
 ```
 Response:
@@ -71,7 +71,7 @@ Response:
 {
   "id": 1,
   "name": "John Doe",
-  "age": 30
+  "value": 30
 }
 ```
 3. Update a Person (PUT /api/:user_id)
@@ -80,7 +80,7 @@ Request:
 ```
 {
   "name": "Jane Smith",
-  "age": 35
+  "value": 35
 }
 ```
 Response:
