@@ -21,14 +21,12 @@ CREATE TABLE IF NOT EXISTS persons (
 `);
     
 // READ details of person by ID or all records 
-router.get('/:user_id?', (req, res) => {
+router.get('/:user_id', (req, res) => {
     const id = req.params.user_id;
-    sqlAll = 'SELECT * FROM persons';
-    sqlOne = 'SELECT * FROM persons WHERE id = ?';
-    
+
     if (id) {
       // If an ID is provided, retrieve one person by ID
-      db.get(sqlOne, [id], (err, row) => {
+      db.get('SELECT * FROM persons WHERE id = ?', [id], (err, row) => {
         if (err) {
           return res.status(500).json({ error: err.message });
         }
@@ -37,15 +35,7 @@ router.get('/:user_id?', (req, res) => {
         }
         res.json(row);
       });
-    } else {
-      // If no ID is provided, retrieve all persons
-      db.all(sqlAll, (err, rows) => {
-        if (err) {
-          return res.status(500).json({ error: err.message });
-        }
-        res.json(rows);
-      });
-    }
+    } 
 });
 
 // CREATE a new person
