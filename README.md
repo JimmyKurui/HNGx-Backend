@@ -11,10 +11,7 @@ This is a simple REST API for managing persons. It allows you to perform CRUD op
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [API Endpoints](#api-endpoints)
-- [Request/Response Examples](#usvalue-examples)
-- [Usvalue Examples](#usvalue-examples)
 - [Testing](#testing)
-- [Dependencies](#dependencies)
 - [License](#license)
   
 ---
