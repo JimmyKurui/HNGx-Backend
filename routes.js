@@ -64,7 +64,6 @@ router.post('/', (req, res) => {
       if (!row) {
         return res.status(404).json({ message: 'Person not found' });
       }
-      res.json(row);
       return res.json(row);
     });
   });
@@ -87,25 +86,28 @@ router.put('/:user_id', (req, res) => {
       if (err) {
         return res.status(500).json({ error: err.message });
       }
-      const insertedId = this.lastID;
-
-      db.get('SELECT * FROM persons WHERE id = ?', [insertedId], (err, row) => {
-        if (err) {
-          return res.status(500).json({ error: err.message });
-        }
-        return res.json(row);
+      return res.json({ message: name + "updated successfully"});
       });
-  });
 });
 
 // DELETE a person by ID
 router.delete('/:user_id', (req, res) => {
   const id = req.params.user_id;
-  db.run('DELETE FROM persons WHERE id = ?', [id], (err) => {
+
+  db.get('SELECT * FROM persons WHERE id = ?', [id], (err, row) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ message: 'Person deleted successfully' });
+    if (!row) {
+      return res.status(404).json({ message: 'Person not found' });
+    }
+
+    db.run('DELETE FROM persons WHERE id = ?', [id], (err) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      return res.json({ message: 'Person deleted successfully', user: row });
+    });
   });
 });
 
